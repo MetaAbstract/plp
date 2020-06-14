@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Messages.vue</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Messages.vue</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>&lt;template>
+  &lt;div class="container">
+    &lt;div class="subjects">
+      &lt;div>Сообщений: {{ messageCount }}&lt;/div>
+      &lt;Subject
+        v-for="subject in this.subjects"
+        :key="subject.id"
+        :subject="subject"
+      >&lt;/Subject>
+    &lt;/div>
+    &lt;div class="messages">
+      &lt;div class="texts" ref="texts">
+        &lt;Message v-for="message in parts" :key="message.id" :message="message">
+        &lt;/Message>
+        &lt;Loader>&lt;/Loader>
+      &lt;/div>
+      &lt;div class="message">
+        &lt;textarea v-model="draft">&lt;/textarea
+        >&lt;img
+          :src="require('@/assets/send.svg')"
+          alt="&amp;gt;"
+          @click="sendMessage"
+        />
+      &lt;/div>
+    &lt;/div>
+    &lt;div class="clearfix">&lt;/div>
+  &lt;/div>
+&lt;/template>
+
+&lt;script>
+/**
+ * окно чата
+ * @module Messages
+ * @property {number|undefined} state.subjectId - идентификтор текущеей темы с сообщениями
+ * или undefined в корне роутера или при начале работы приложения
+ * @property {string} state.draft - черновик сообщения текущей темы
+ * @property {Array.Subject} computed.subjects - темы сообщений из состояния
+ * @property {number} computed.messageCount - количество сообщений из состояния
+ * @property {number} computed.parts - сообщения по текущей темы
+ * @property {} watch.$route - отслеживает переходы роутера
+ */
+import { commands } from '../store/index.js'
+import Subject from './Subject'
+import Message from './Message'
+import Loader from './Loader'
+
+export default {
+  data: function () {
+    return {
+      subjectId: undefined,
+      draft: ''
+    }
+  },
+  methods: {
+    sendMessage () {
+      if (this.draft.trim().length > 0) {
+        this.$store.commit(commands.mutations.saveDraft, '')
+        this.$store.commit(commands.mutations.sendMessage, this.draft)
+        this.draft = ''
+      }
+    }
+  },
+  components: {
+    Subject,
+    Message,
+    Loader
+  },
+  created () {
+    // загрузим историю сообщений
+    this.$store.dispatch(commands.actions.loadHistory)
+    // если открыли ссылку с темой сразу, то попробуем ее прочитать
+    if (this.$route.name === 'Subject') {
+      this.subjectId = Number.parseInt(this.$route.params.subjectId)
+      this.$store.commit(
+        commands.mutations.setSubjectId,
+        Number.parseInt(this.$route.params.subjectId)
+      )
+    }
+  },
+  updated () {
+    // прокрутим вниз до последнего сообщенияю получилась фича
+    this.$refs.texts.scrollTop = this.$refs.texts.scrollHeight
+  },
+  computed: {
+    subjects () {
+      return this.$store.state.subjects
+    },
+    messageCount () {
+      return this.$store.getters.messageCount
+    },
+    parts () {
+      return this.$store.getters.getParts
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (from.name === 'Subject') {
+        if (this.draft.trim().length > 0) {
+          this.$store.commit(commands.mutations.saveDraft, this.draft)
+          this.draft = ''
+        }
+      }
+      if (to.name === 'Subject') {
+        this.subjectId = Number.parseInt(to.params.subjectId)
+        this.draft = this.$store.getters.getDraft(this.subjectId)
+        this.$store.commit(
+          commands.mutations.setSubjectId,
+          Number.parseInt(to.params.subjectId)
+        )
+      } else if (to.name === 'Messages' || to.name === 'Default') {
+        this.subjectId = undefined
+        this.$store.commit(commands.mutations.setSubjectId, undefined)
+      }
+    }
+  }
+}
+&lt;/script>
+
+&lt;style>
+.container {
+  min-width: calc(2 * var(--left-width));
+  min-height: calc(3 * var(--message-height));
+  overflow: visible;
+}
+.subjects {
+  float: left;
+  height: 100vh;
+  width: var(--left-width);
+  min-height: calc(3 * var(--subject-height));
+  overflow-y: auto;
+}
+.messages {
+  float: right;
+  height: 100vh;
+  width: calc(var(--right-width));
+  min-width: var(--left-width);
+}
+.clearfix {
+  clear: both;
+}
+.texts {
+  height: calc(100vh - var(--message-height));
+  min-height: calc(3 * var(--message-height));
+  overflow-y: auto;
+}
+.message {
+  height: var(--message-height);
+}
+&lt;/style>
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api.html">api</a></li><li><a href="module-Messages.html">Messages</a></li><li><a href="module-store.html">store</a></li><li><a href="module-Subject.html">Subject</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sun Jun 14 2020 22:36:13 GMT+0300 (Moscow Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

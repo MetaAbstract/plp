@@ -1,24 +1,10 @@
-# plpchat
+# p-lp chat
 
-## Project setup
-```
-npm install
-```
+## компонентная модель
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![компонентная модель](UIModel.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## модель CSS
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![модель css](CSSModel.png)
+![размеры css](sizes.png)
