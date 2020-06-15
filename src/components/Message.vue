@@ -3,6 +3,11 @@
 </template>
 
 <script>
+/**
+ * Сообщение в чате
+ * @module Message
+ * @property {Object.Message} message
+ */
 export default {
   props: ['message']
 }

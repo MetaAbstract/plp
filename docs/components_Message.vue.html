@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Messages.vue</title>
+    <title>JSDoc: Source: components/Message.vue</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Messages.vue</h1>
+    <h1 class="page-title">Source: components/Message.vue</h1>
 
     
 
@@ -27,41 +27,21 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>&lt;template>
-      &lt;div class="messages" ref="messages">
-        &lt;Message v-for="message in parts" :key="message.id" :message="message">
-        &lt;/Message>
-        &lt;Loader>&lt;/Loader>
-      &lt;/div>
+  &lt;div>{{message.text}}{{message.created}}&lt;/div>
 &lt;/template>
 
 &lt;script>
 /**
- * отправленные и полученные сообщения
- * @module Messages
- * @property {Array.Message} props.parts - массив сообщений
+ * Сообщение в чате
+ * @module Message
+ * @property {Object.Message} message
  */
-import Message from './Message'
-import Loader from './Loader'
 export default {
-  props: ['parts'],
-  components: {
-    Loader,
-    Message
-  },
-  updated () {
-    // прокрутим вниз до последнего сообщенияю получилась фича
-    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
-  }
+  props: ['message']
 }
 &lt;/script>
 
-&lt;style>
-.messages {
-  height: calc(100vh - var(--message-height));
-  min-height: calc(3 * var(--message-height));
-  overflow-y: auto;
-}
-&lt;/style>
+&lt;style lang="scss" scoped>&lt;/style>
 </code></pre>
         </article>
     </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Messages</title>
+    <title>JSDoc: Module: Chat</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Messages</h1>
+    <h1 class="page-title">Module: Chat</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">отправленные и полученные сообщения</div>
+            <div class="description">окно чата</div>
         
 
         
@@ -84,13 +84,16 @@
 
         <tr>
             
-                <td class="name"><code>props.parts</code></td>
+                <td class="name"><code>state.subjectId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.Message</span>
+<span class="param-type">number</span>
+|
+
+<span class="param-type">undefined</span>
 
 
             
@@ -100,7 +103,95 @@
 
             
 
-            <td class="description last">массив сообщений</td>
+            <td class="description last">идентификтор текущеей темы с сообщениями
+или undefined в корне роутера или при начале работы приложения</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state.draft</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">черновик сообщения текущей темы</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>computed.subjects</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.Subject</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">темы сообщений из состояния</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>computed.parts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">сообщения по текущей темы</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>watch.$route</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">отслеживает переходы роутера</td>
         </tr>
 
     
@@ -139,7 +230,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_Messages.vue.html">components/Messages.vue</a>, <a href="components_Messages.vue.html#line2">line 2</a>
+        <a href="components_Chat.vue.html">components/Chat.vue</a>, <a href="components_Chat.vue.html#line2">line 2</a>
     </li></ul></dd>
     
 

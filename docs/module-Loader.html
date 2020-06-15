@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Messages.vue</title>
+    <title>JSDoc: Module: Loader</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,54 +17,132 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Messages.vue</h1>
+    <h1 class="page-title">Module: Loader</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>&lt;template>
-      &lt;div class="messages" ref="messages">
-        &lt;Message v-for="message in parts" :key="message.id" :message="message">
-        &lt;/Message>
-        &lt;Loader>&lt;/Loader>
-      &lt;/div>
-&lt;/template>
+        
+            
+        
+    
+</header>
 
-&lt;script>
-/**
- * отправленные и полученные сообщения
- * @module Messages
- * @property {Array.Message} props.parts - массив сообщений
- */
-import Message from './Message'
-import Loader from './Loader'
-export default {
-  props: ['parts'],
-  components: {
-    Loader,
-    Message
-  },
-  updated () {
-    // прокрутим вниз до последнего сообщенияю получилась фича
-    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
-  }
-}
-&lt;/script>
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">анимированный лоадер</div>
+        
 
-&lt;style>
-.messages {
-  height: calc(100vh - var(--message-height));
-  min-height: calc(3 * var(--message-height));
-  overflow-y: auto;
-}
-&lt;/style>
-</code></pre>
-        </article>
-    </section>
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_Loader.vue.html">components/Loader.vue</a>, <a href="components_Loader.vue.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

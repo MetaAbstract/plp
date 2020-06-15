@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Messages.vue</title>
+    <title>JSDoc: Source: components/Subjects.vue</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Messages.vue</h1>
+    <h1 class="page-title">Source: components/Subjects.vue</h1>
 
     
 
@@ -27,38 +27,43 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>&lt;template>
-      &lt;div class="messages" ref="messages">
-        &lt;Message v-for="message in parts" :key="message.id" :message="message">
-        &lt;/Message>
-        &lt;Loader>&lt;/Loader>
-      &lt;/div>
+  &lt;div class="subjects">
+    &lt;div>Сообщений: {{ messageCount }}&lt;/div>
+    &lt;Subject
+      v-for="subject in subjects"
+      :key="subject.id"
+      :subject="subject"
+    >&lt;/Subject>
+  &lt;/div>
 &lt;/template>
 
 &lt;script>
 /**
- * отправленные и полученные сообщения
- * @module Messages
- * @property {Array.Message} props.parts - массив сообщений
+ * темы сообщений
+ * @module Subjects
+ * @property {Array.Subject } props.subjects - массив тем
+ * @property {number} computed.messageCount - количество сообщений из состояния
  */
-import Message from './Message'
-import Loader from './Loader'
+import Subject from './Subject'
 export default {
-  props: ['parts'],
+  props: ['subjects'],
   components: {
-    Loader,
-    Message
+    Subject
   },
-  updated () {
-    // прокрутим вниз до последнего сообщенияю получилась фича
-    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+  computed: {
+    messageCount () {
+      return this.$store.getters.messageCount
+    }
   }
 }
 &lt;/script>
 
 &lt;style>
-.messages {
-  height: calc(100vh - var(--message-height));
-  min-height: calc(3 * var(--message-height));
+.subjects {
+  float: left;
+  height: 100vh;
+  width: var(--left-width);
+  min-height: calc(3 * var(--subject-height));
   overflow-y: auto;
 }
 &lt;/style>

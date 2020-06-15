@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Messages from '../components/Messages'
+import Chat from '../components/Chat'
 
 Vue.use(VueRouter)
 
@@ -8,17 +8,17 @@ const routes = [
   {
     path: '/',
     name: 'Messages',
-    component: Messages
+    component: Chat
   },
   {
     path: '/subject/:subjectId',
     name: 'Subject',
-    component: Messages
+    component: Chat
   },
   {
     path: '*',
     name: 'Default',
-    component: Messages
+    component: Chat
   }
 ]
 

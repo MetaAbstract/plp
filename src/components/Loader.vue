@@ -16,6 +16,10 @@
 </template>
 
 <script>
+/**
+ * анимированный лоадер
+ * @module Loader
+ */
 export default {}
 </script>
 
