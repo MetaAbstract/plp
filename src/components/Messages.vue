@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="messages-and-loader">
     <div v-if="!loading" class="messages" ref="messages">
       <Message v-for="message in parts" :key="message.id" :message="message">
       </Message>
-      <div
-        class="loader"
-        :style="{position:'absolute',top:0,left:0,opacity:0.5,backgroundColor:'grey',width:'100%',height:'100%'}"
-        v-if="sending"
-      >
-        <Loader></Loader>
-      </div>
     </div>
     <div class="loader" v-if="loading">
+      <Loader></Loader>
+    </div>
+    <div
+      class="loader"
+      :style="{position:'absolute',bottom:0,left:0,opacity:0.5,backgroundColor:'grey',width:'100%',height:'100%'}"
+      v-if="sending"
+    >
       <Loader></Loader>
     </div>
   </div>
@@ -61,7 +61,6 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  position: relative;
 }
 .loader {
   height: calc(99vh - var(--message-height));
@@ -71,5 +70,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.messages-and-loader{
+  position: relative;
 }
 </style>

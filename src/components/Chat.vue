@@ -41,10 +41,11 @@ export default {
     sendMessage () {
       if (this.draft.trim().length > 0) {
         this.$store.commit(commands.mutations.setSending, true)
-        setTimeout(() => this.$store.commit(commands.mutations.setSending, false), 1000)
-
-        this.$store.commit(commands.mutations.saveDraft, '')
-        this.$store.commit(commands.mutations.sendMessage, this.draft)
+        setTimeout(() => {
+          this.$store.commit(commands.mutations.setSending, false)
+          this.$store.commit(commands.mutations.saveDraft, '')
+          this.$store.commit(commands.mutations.sendMessage, this.draft)
+        }, 1000)
         this.draft = ''
       }
     }
