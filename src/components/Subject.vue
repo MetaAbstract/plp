@@ -1,13 +1,13 @@
 <template>
   <router-link class="subject" :to="{name:'Subject',params:{subjectId:this.subject.id}}" tag="div">
-      <div class="subject__created">{{this.subject.created}}</div>
+      <div class="subject__created">{{new Date(this.subject.created) | moment("ll")}}</div>
       <div class="subject__text">{{this.subject.subject}}</div>
    </router-link>
 </template>
 
 <script>
 /**
- * компонент темы сообщений
+ * компонент темы сообщенийa
  * @module Subject
  */
 

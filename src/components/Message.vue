@@ -17,7 +17,7 @@
     </div>
     <div>
       <span class="text__author">{{ message.author }}</span>
-      <span class="text__created">{{ message.created }}</span>
+      <span class="text__created">{{ new Date(message.created) | moment("lll") }}</span>
     </div>
   </div>
 </template>
