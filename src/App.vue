@@ -9,7 +9,7 @@
   box-sizing: border-box;
   --left-width:18.75rem;
   --right-width:calc(100vw - var(--left-width) - 15px);/* 15px браузер забирает под скроллбар*/
-  --message-height:4.9375rem;
+  --message-height:5rem;
   --subject-height:6.25rem;
   --break-point-width: calc(2 * var(--left-width));
 }

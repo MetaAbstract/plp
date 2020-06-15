@@ -25,8 +25,8 @@ export default {}
 
 <style scoped>
 .lds-spinner {
-  color: official;
-  display: none ; /*inline-block;*/
+  color: #F3F6F8;
+  display: block;
   position: relative;
   width: 80px;
   height: 80px;

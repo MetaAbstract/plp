@@ -36,7 +36,9 @@ export const commands = {
     setSubjects: 'setSubjects',
     setSubjectId: 'setSubjectId',
     sendMessage: 'sendMessage',
-    saveDraft: 'saveDraft'
+    saveDraft: 'saveDraft',
+    setLoading: 'setLoading',
+    setSending: 'setSending'
   }
 }
 /**
@@ -62,6 +64,8 @@ export const commands = {
  * @property {Array.Subjects} state.subjects - обсуждений
  * @property {number|undefined} state.subjectId - текущая тема, чтобы геттер
  * был реактивным
+ * @property {boolean} state.loading - флаг загрузки сообщений темы для отработки в интерфейсе
+ * @property {boolean} state.sending - флаг отправки сообщения для отработки в интерфейсе
  * @property {function} mutations.setSubjects - загружает начальные данные по условному апи
  * @property {function} mutations.setSubjectId - устанавливает текущую тему
  * @property {function} mutations.sendMessage - отправляет сообщение
@@ -76,11 +80,19 @@ export default new Vuex.Store({
     name: 'Артем',
     subjectId: undefined,
     subjects: [],
-    historyLoaded: false
+    historyLoaded: false,
+    loading: false,
+    sending: false
   },
   mutations: {
     setSubjects (state, subjects) {
       state.subjects = [...subjects]
+    },
+    setLoading (state, loading) {
+      state.loading = loading
+    },
+    setSending (state, sending) {
+      state.sending = sending
     },
     setSubjectId (state, subjectId) {
       state.subjectId = subjectId

@@ -4,12 +4,11 @@
     <div class="texts">
       <Messages :parts="parts"></Messages>
       <div class="message">
-        <textarea v-model="draft"></textarea
-        ><img
-          :src="require('@/assets/send.svg')"
-          alt="&gt;"
-          @click="sendMessage"
-        />
+        <textarea :disabled="sending" class="message__input" v-model="draft" placeholder="Введите текст..."></textarea
+        >
+        <span class="message__send" @click="sendMessage">
+          <img :src="require('@/assets/send.svg')" alt="&gt;" />
+        </span>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -41,6 +40,9 @@ export default {
   methods: {
     sendMessage () {
       if (this.draft.trim().length > 0) {
+        this.$store.commit(commands.mutations.setSending, true)
+        setTimeout(() => this.$store.commit(commands.mutations.setSending, false), 1000)
+
         this.$store.commit(commands.mutations.saveDraft, '')
         this.$store.commit(commands.mutations.sendMessage, this.draft)
         this.draft = ''
@@ -69,6 +71,9 @@ export default {
     },
     parts () {
       return this.$store.getters.getParts
+    },
+    sending () {
+      return this.$store.state.sending
     }
   },
   watch: {
@@ -80,6 +85,8 @@ export default {
         }
       }
       if (to.name === 'Subject') {
+        this.$store.commit(commands.mutations.setLoading, true)
+        setTimeout(() => this.$store.commit(commands.mutations.setLoading, false), 1000)
         this.subjectId = Number.parseInt(to.params.subjectId)
         this.draft = this.$store.getters.getDraft(this.subjectId)
         this.$store.commit(
@@ -97,13 +104,14 @@ export default {
 
 <style>
 .chat {
-  min-width: calc(2 * var(--left-width));
+  min-width: calc(3 * var(--left-width));
   min-height: calc(3 * var(--message-height));
+  max-height: 45rem;
   overflow: visible;
 }
 .texts {
-  float: right;
-  height: 100vh;
+  float: left;
+  height: 99vh;
   width: calc(var(--right-width));
   min-width: var(--left-width);
 }
@@ -112,5 +120,30 @@ export default {
 }
 .message {
   height: var(--message-height);
+  line-height: var(--message-height);
+  min-width: 30rem;
+}
+.message__input {
+  display: inline-block;
+  height: var(--message-height);
+  width: calc(var(--right-width) - var(--message-height));
+  min-width: calc(30rem - - var(--message-height));
+  resize: none;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #E9EDF2;
+  vertical-align: bottom
+}
+.message__input:focus{
+  outline-width: 0px;
+}
+.message__send {
+  display: inline-flex;
+  background-color: #398bff;
+  height: var(--message-height);
+  width: var(--message-height);
+  justify-content: center;
+  align-items: center;
+  vertical-align: bottom
 }
 </style>
