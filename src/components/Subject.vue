@@ -1,5 +1,5 @@
 <template>
-  <router-link class="subject" :to="{name:'Subject',params:{subjectId:this.subject.id}}" tag="div">
+  <router-link class="subject" :class="{'subject--current':isCurrent}" :to="{name:'Subject',params:{subjectId:this.subject.id}}" tag="div" >
       <div class="subject__created">{{new Date(this.subject.created) | moment("ll")}}</div>
       <div class="subject__text">{{this.subject.subject}}</div>
    </router-link>
@@ -12,7 +12,12 @@
  */
 
 export default {
-  props: ['subject']
+  props: ['subject'],
+  computed: {
+    isCurrent () {
+      return this.subject.id === this.$store.state.subjectId
+    }
+  }
 }
 </script>
 
@@ -21,6 +26,9 @@ export default {
   padding-left:1.475rem;
   padding-right: 1.25rem;
   border-top: 1px solid #E9EDF2;;
+}
+.subject--current{
+  background-color: #FFFFFF;
 }
 .subject__created {
   margin-top:1.25rem;
@@ -34,6 +42,6 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;*/
-  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 </style>
